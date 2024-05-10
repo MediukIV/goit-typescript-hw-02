@@ -67,6 +67,10 @@ function App() {
     if (state) setSelectedPhoto(photo);
   }
 
+  function closeModal(): void {
+    setIsModalOpen(false);
+  }
+
   return (
     <>
       <SearchBar onSubmit={handleQuery} isLoading={isLoading} />
@@ -85,7 +89,7 @@ function App() {
       <ImageModal
         isOpen={isModalOpen}
         photo={selectedPhoto}
-        onChange={handleModal}
+        closeModal={closeModal}
       />
       <Toaster position="top-right" />
     </>

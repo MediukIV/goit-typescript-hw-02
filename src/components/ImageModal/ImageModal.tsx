@@ -6,27 +6,32 @@ import { ImageSrc } from '../../App';
 interface ImageModalProps {
   isOpen: boolean;
   photo: { src: string };
-
-  onChange: (arg0: boolean, arg1: ImageSrc) => void;
+  closeModal: () => void;
 }
 
 const ImageModal: FC<ImageModalProps> = ({
-  isOpen = false,
+  isOpen,
   photo,
-  onChange,
+  closeModal,
 }) => {
-  Modal.setAppElement(document.getElementById('root') as HTMLElement);
   return (
+    <div className={css.modalBlock}>
     <Modal
-      className={css.modal}
+      className={css.modalContent}
+      overlayClassName={css.modalOverlay}
       isOpen={isOpen}
-      onRequestClose={() => onChange}
+      onRequestClose={closeModal}
+      contentLabel="Selected Image"
+      appElement={document.getElementById("root") as HTMLElement}
+      ariaHideApp={false}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
       preventScroll={true}
     >
-      <img className={css.modalImg} src={photo.src} />
-    </Modal>
+      <img className={css.image} src={photo.src} />
+      <button className={css.modalBtn} onClick={closeModal}>Close</button>
+      </Modal>
+      </div>
   );
 };
 
